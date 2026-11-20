@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../assets/css/styles.css" rel="stylesheet">
+    <style>
+      body { overflow: hidden; background: transparent; }
+      #navbar-container { min-height: 64px; }
+      .topnav-navbar { min-height: 64px; }
+    </style>
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const navbarContainer = document.querySelector("#navbar-container");
+
+      async function loadNavbar() {
+        try {
+          const response = await fetch("./navbar.html");
+          if (!response.ok) {
+            throw new Error(`Error ${response.status}`);
+          }
+
+          navbarContainer.innerHTML = await response.text();
+          navbarContainer.querySelectorAll("a").forEach((link) => {
+            link.target = "_top";
+          });
+          const navbar = navbarContainer.querySelector(".topnav-navbar");
+          const reportHeight = () => {
+            const height = Math.ceil(navbar.getBoundingClientRect().height);
+            window.parent.postMessage({ type: "navbar-height", height }, window.location.origin);
+          };
+          new ResizeObserver(reportHeight).observe(navbar);
+          reportHeight();
+        } catch (error) {
+          console.error("No se pudo cargar el navbar:", error);
+          navbarContainer.textContent = "No se pudo cargar la navegación.";
+          window.parent.postMessage({ type: "navbar-height", height: 64 }, window.location.origin);
+        }
+      }
+
+      loadNavbar();
+    </script>
+  </body>
+</html>

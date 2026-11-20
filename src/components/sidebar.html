@@ -1,0 +1,86 @@
+<button
+  class="btn sidebar-mobile-toggle d-lg-none"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#topnavSidebar"
+  aria-controls="topnavSidebar"
+>
+  <i class="bi bi-list" aria-hidden="true"></i>
+  Menú
+</button>
+
+<aside
+  class="app-sidebar offcanvas-lg offcanvas-start"
+  tabindex="-1"
+  id="topnavSidebar"
+  aria-labelledby="topnavSidebarTitle"
+>
+  <div class="offcanvas-header sidebar-mobile-header d-lg-none">
+    <h2 class="offcanvas-title" id="topnavSidebarTitle">Menú Toyota</h2>
+    <button class="btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Cerrar menú"></button>
+  </div>
+
+  <div class="offcanvas-body sidebar-body">
+    <a class="sidebar-brand" href="../views/dashbaard.html" aria-label="Toyota, panel principal">
+      <span class="sidebar-brand-mark" aria-hidden="true"><i class="bi bi-compass-fill"></i></span>
+      <span class="sidebar-brand-name">TOYOTA<small>PANEL DE GESTIÓN</small></span>
+    </a>
+
+    <div class="sidebar-workspace">
+      <span class="workspace-icon" aria-hidden="true"><i class="bi bi-building"></i></span>
+      <span><strong>Toyota</strong><small>Empresa</small></span>
+      <i class="bi bi-chevron-expand workspace-chevron" aria-hidden="true"></i>
+    </div>
+
+    <nav class="sidebar-navigation" aria-label="Navegación del panel">
+      <span class="sidebar-section-label">GENERAL</span>
+      <a class="sidebar-link active" href="../views/dashbaard.html" aria-current="page">
+        <i class="bi bi-grid-1x2" aria-hidden="true"></i><span>Panel principal</span>
+      </a>
+
+      <span class="sidebar-section-label">INVENTARIO</span>
+      <a class="sidebar-link" href="#inventario">
+        <i class="bi bi-boxes" aria-hidden="true"></i><span>Inventario</span>
+      </a>
+      <a class="sidebar-link" href="#productos">
+        <i class="bi bi-box-seam" aria-hidden="true"></i><span>Productos</span>
+      </a>
+      <a class="sidebar-link" href="#entradas">
+        <i class="bi bi-box-arrow-in-down" aria-hidden="true"></i><span>Entradas</span>
+      </a>
+      <a class="sidebar-link" href="#salidas">
+        <i class="bi bi-box-arrow-up" aria-hidden="true"></i><span>Salidas</span>
+      </a>
+
+      <span class="sidebar-section-label">ADMINISTRACIÓN</span>
+      <a class="sidebar-link" href="../views/useradmin.html">
+        <i class="bi bi-people" aria-hidden="true"></i><span>Usuarios</span>
+      </a>
+      <a class="sidebar-link" href="#administradores">
+        <i class="bi bi-person-gear" aria-hidden="true"></i><span>Administradores</span>
+      </a>
+
+      <span class="sidebar-section-label">CONFIGURACIÓN</span>
+      <a class="sidebar-link" href="#configuracion-usuario">
+        <i class="bi bi-person-circle" aria-hidden="true"></i><span>Usuario</span>
+      </a>
+      <a class="sidebar-link" href="#configuracion-email">
+        <i class="bi bi-envelope" aria-hidden="true"></i><span>Correo electrónico</span>
+      </a>
+      <a class="sidebar-link" href="#configuracion-password">
+        <i class="bi bi-shield-lock" aria-hidden="true"></i><span>Contraseña</span>
+      </a>
+      <a class="sidebar-link sidebar-link-restore" href="#restaurar">
+        <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i><span>Restaurar</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-account">
+      <span class="account-avatar" aria-hidden="true">TN</span>
+      <span class="account-copy"><strong>Administrador</strong><small>Cuenta Toyota</small></span>
+      <button class="account-menu-button" type="button" aria-label="Opciones de la cuenta">
+        <i class="bi bi-three-dots" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</aside>

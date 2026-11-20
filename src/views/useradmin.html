@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f8fc">
+    <meta name="description" content="Administración de usuarios de Toyota.">
+    <title>Administración de usuarios | Toyota</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../assets/css/styles.css" rel="stylesheet">
+  </head>
+  <body class="dashboard-page">
+    <iframe
+      class="users-navbar-frame"
+      id="users-navbar-frame"
+      src="../components/navbar-frame.html"
+      title="Navegación principal"
+      scrolling="no"
+    ></iframe>
+    <div class="dashboard-layout">
+      <iframe
+        class="users-sidebar-frame"
+        id="users-sidebar-frame"
+        src="../components/sidebar-frame.html"
+        title="Menú lateral"
+        scrolling="no"
+      ></iframe>
+      <main class="dashboard-main">
+        <header class="dashboard-topbar">
+          <div class="dashboard-breadcrumb">
+            <span>Toyota</span>
+            <i class="bi bi-chevron-right" aria-hidden="true"></i>
+            <strong>Administración de usuarios</strong>
+          </div>
+          <div class="dashboard-topbar-actions">
+            <span class="topbar-avatar" aria-label="Administrador">TN</span>
+          </div>
+        </header>
+        <div class="users-page-content" id="userlist-container">
+          <p class="users-loading" role="status">Cargando usuarios...</p>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/users.js"></script>
+    <script>
+      const usersNavbarFrame = document.querySelector("#users-navbar-frame");
+      const usersSidebarFrame = document.querySelector("#users-sidebar-frame");
+
+      function updateUsersSidebarFrameLayout() {
+        const isCompact = window.innerWidth < 768;
+        usersSidebarFrame.style.height = isCompact ? "64px" : `${window.innerHeight}px`;
+        usersSidebarFrame.contentWindow.postMessage(
+          { type: "sidebar-layout", compact: isCompact },
+          window.location.origin,
+        );
+      }
+
+      usersSidebarFrame.addEventListener("load", updateUsersSidebarFrameLayout);
+      window.addEventListener("resize", updateUsersSidebarFrameLayout);
+      updateUsersSidebarFrameLayout();
+
+      window.addEventListener("message", (event) => {
+        if (event.origin !== window.location.origin) {
+          return;
+        }
+
+        if (event.source === usersNavbarFrame.contentWindow &&
+            event.data?.type === "navbar-height" &&
+            Number.isFinite(event.data.height)) {
+          usersNavbarFrame.style.height = `${Math.max(64, Math.min(event.data.height, 500))}px`;
+        } else if (event.source === usersSidebarFrame.contentWindow &&
+                   event.data?.type === "sidebar-height" &&
+                   Number.isFinite(event.data.height)) {
+          const maxHeight = window.innerWidth < 768 ? 64 : 1200;
+          usersSidebarFrame.style.height = `${Math.max(64, Math.min(event.data.height, maxHeight))}px`;
+        }
+      });
+    </script>
+  </body>
+</html>

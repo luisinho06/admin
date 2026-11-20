@@ -1,0 +1,134 @@
+<section class="users-page">
+  <div class="users-page-heading">
+    <div>
+      <span class="dashboard-eyebrow">ADMINISTRACIÓN</span>
+      <h1>Usuarios</h1>
+      <p>Administra las cuentas, roles y accesos de tu equipo.</p>
+    </div>
+    <button class="btn dashboard-primary-button" type="button" id="add-user-button">
+      <i class="bi bi-plus-lg" aria-hidden="true"></i> Añadir usuario
+    </button>
+  </div>
+
+  <div class="accordion users-accordion" id="users-accordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#users-accordion-panel"
+          aria-expanded="true"
+          aria-controls="users-accordion-panel"
+        >
+          Tabla de usuarios
+        </button>
+      </h2>
+      <div id="users-accordion-panel" class="accordion-collapse collapse show">
+        <div class="accordion-body">
+          <section class="dashboard-panel users-table-panel" aria-labelledby="users-table-title">
+    <div class="users-table-heading">
+      <div>
+        <h2 id="users-table-title">Usuarios registrados</h2>
+        <p>Consulta y administra las cuentas registradas.</p>
+      </div>
+      <label class="users-search">
+        <i class="bi bi-search" aria-hidden="true"></i>
+        <input id="user-search" type="search" placeholder="Buscar usuario..." aria-label="Buscar usuarios">
+      </label>
+    </div>
+    <div class="table-responsive users-table-responsive">
+      <table class="table users-table align-middle mb-0">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col" class="users-actions-heading">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="users-table-body"></tbody>
+      </table>
+    </div>
+    <div class="users-table-footer" id="users-result-count" aria-live="polite"></div>
+  </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade" id="user-form-modal" tabindex="-1" aria-labelledby="user-form-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content user-modal-content">
+      <form id="user-form">
+        <div class="modal-header">
+          <h2 class="modal-title" id="user-form-title">Añadir usuario</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="user-form-grid">
+            <label class="user-form-field">
+              <span>Nombre</span>
+              <input class="form-control" id="user-first-name" required maxlength="60" autocomplete="given-name">
+            </label>
+            <label class="user-form-field">
+              <span>Apellido</span>
+              <input class="form-control" id="user-last-name" required maxlength="60" autocomplete="family-name">
+            </label>
+            <label class="user-form-field user-form-field-full">
+              <span>Email</span>
+              <input class="form-control" id="user-email" type="email" required maxlength="120" autocomplete="email">
+            </label>
+            <label class="user-form-field user-form-field-full">
+              <span>Role</span>
+              <select class="form-select" id="user-role" required>
+                <option>Administrador</option>
+                <option>Supervisor</option>
+                <option>Inventario</option>
+              </select>
+            </label>
+          </div>
+          <p class="user-form-error" id="user-form-error" role="alert" hidden></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn dashboard-secondary-button" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn dashboard-primary-button">Guardar usuario</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="user-details-modal" tabindex="-1" aria-labelledby="user-details-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content user-modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="user-details-title">Detalles del usuario</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body"><dl class="user-details-list" id="user-details-list"></dl></div>
+      <div class="modal-footer">
+        <button type="button" class="btn dashboard-secondary-button" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="user-delete-modal" tabindex="-1" aria-labelledby="user-delete-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content user-modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="user-delete-title">Eliminar usuario</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body"><p id="user-delete-message" class="user-delete-message"></p></div>
+      <div class="modal-footer">
+        <button type="button" class="btn dashboard-secondary-button" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn user-delete-confirm" id="confirm-delete-user">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
